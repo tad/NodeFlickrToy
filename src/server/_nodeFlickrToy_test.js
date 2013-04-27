@@ -7,8 +7,10 @@
  */
 (function() {
    "use strict";
-    exports.test_nothing = function(test) {
-        console.log("Test nothing");
+
+    exports.test_NodeFlickrToyExists = function(test) {
+        var nodeFlickrToy = require("./nodeFlickrToy.js");
+        test.notEqual(nodeFlickrToy, null, "nodeFlickrToy should not be null");
         test.done();
     };
 })();
