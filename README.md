@@ -1,5 +1,8 @@
 Tad's NodeFlickrToy
 
+INSTRUCTIONS: To build: Windows: just run jake from command line.  If you're not on windows, you'll need to create a
+bash script to run jake for you.
+
 This is just a super simple web toy / experiment with TDD, javascript and node.js plus whatever node modules I need to
 make everything work.
 
