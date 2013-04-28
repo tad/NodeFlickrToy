@@ -8,31 +8,72 @@
 (function() {
    "use strict";
 
+    var request = require("request");
     var nodeFlickrToy = require("./nodeFlickrToy.js");
+    var flickrId = "b79df6b678836fd497f972e39b178b85";
+    var oldRequestGetMethod;
 
-    exports.test_NodeFlickrToyExists = function(test) {
+    function mockRequest() {
+        var urlEntered = "";
+        var paramsSent = {};
+        oldRequestGetMethod = request.get;
+        request.get = function(options, cb) {
+            urlEntered = options.url;
+            paramsSent = options.qs;
+            cb(null, 200, "some data");
+        };
 
-        test.notEqual(nodeFlickrToy, null, "nodeFlickrToy should not be null");
-        test.done();
+        request.getUrlEntered = function() {
+            return urlEntered;
+        };
+
+        request.getParamsSent = function() {
+            return paramsSent;
+        };
+    }
+
+    function restoreRequest() {
+        request.get = oldRequestGetMethod;
+    }
+
+    exports.setUp = function(done) {
+        mockRequest();
+        done();
     };
 
-    exports.test_getRecentPhotosMethodExists = function(test) {
-        var photos = nodeFlickrToy.getRecentPhotos(function(data){
+    exports.tearDown = function(done) {
+        restoreRequest();
+        done();
+    };
+
+    exports.test_getRecentPhotosTakesFlickrAPIKey = function(test) {
+        nodeFlickrToy.getRecentPhotos(flickrId, function(data){
         });
+
         test.done();
     };
 
     exports.test_getRecentPhotosCallsProperFlickrUrl = function(test) {
-        var nock = require("nock");
-        var returnValue = {'some_key':'some_value'};
-        nock('http://api.flickr.com')
-            .get('/services/rest/?method=flickr.photos.getRecent&api_key=someFlickrId&format=json')
-            .reply(200, returnValue);
+        var expectedUrl = "http://api.flickr.com/services/rest/?method=flickr.photos.getRecent";
 
-        nodeFlickrToy.getRecentPhotos(function(data){
-            test.deepEqual(data, returnValue);
+
+        nodeFlickrToy.getRecentPhotos(flickrId, function(data){
+            test.equal(request.getUrlEntered(), expectedUrl);
+            test.done();
+        });
+
+    };
+
+    exports.test_getRecentPhotosSetsProperUrlParams = function(test) {
+        var expectedParamsObj = {
+            'api_key': flickrId,
+            'format' : 'json',
+            'nojsoncallback': '1'
+        };
+
+        nodeFlickrToy.getRecentPhotos(flickrId, function(data) {
+            test.deepEqual(request.getParamsSent(), expectedParamsObj);
             test.done();
         });
     };
-
 })();

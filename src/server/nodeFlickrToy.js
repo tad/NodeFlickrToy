@@ -3,14 +3,18 @@
 
     var request = require("request");
 
-    exports.getRecentPhotos = function(callback){
-        var url = "http://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=someFlickrId&format=json";
-//        var paramsObj = {
-//            //'format': 'json'
-//        };
+    function getRecentPhotos(flickrAPIKey, callback){
+        var url = "http://api.flickr.com/services/rest/?method=flickr.photos.getRecent";
+        var paramsObj = {
+            'api_key': flickrAPIKey,
+            'format' : 'json',
+            'nojsoncallback': '1'
+        };
 
-        request({url: url, json:true}, function(error, response, body) {
+        request.get({url: url, json:true, qs:paramsObj}, function(error, response, body) {
             callback(body);
         });
-    };
+    }
+
+    exports.getRecentPhotos = getRecentPhotos;
 })();
