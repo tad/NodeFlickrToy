@@ -10,7 +10,7 @@
 
     var request = require("request");
     var nodeFlickrToy = require("./nodeFlickrToy.js");
-    var flickrId = "b79df6b678836fd497f972e39b178b85";
+    var flickrId = "AN API KEY HERE";
     var oldRequestGetMethod;
 
     function mockRequest() {
