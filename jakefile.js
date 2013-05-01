@@ -12,7 +12,6 @@
 
     desc("Build and test");
     task("default", ["lint", "test"]);
-//    task("default", ["test"]);
 
     desc("Lint everything!");
     task("lint", function() {
