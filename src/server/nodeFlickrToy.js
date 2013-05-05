@@ -1,33 +1,11 @@
 (function(){
     "use strict";
 
-    var request = require("request");
+    var CONTENT_DIR = "src/server/content";
 
-    function getRecentPhotos(flickrAPIKey, callback){
-        var url = "http://api.flickr.com/services/rest/?method=flickr.photos.getRecent";
-
-        var paramsObj = {
-            'api_key': flickrAPIKey,
-            'format' : 'json',
-            'nojsoncallback': '1'
-        };
-
-        request.get({url: url, json:true, qs:paramsObj}, function(error, response, body) {
-            callback(getListOfPhotoUrls(body));
-        });
-    }
-
-    function getPhotoUrl(photo) {
-        return "http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" +
-            photo.secret + "_m.jpg";
-    }
-
-    function getListOfPhotoUrls(body) {
-        var listOfUrls = [];
-        for(var i = 0; i < body.photos.photo.length; i += 1)
-            listOfUrls.push(getPhotoUrl(body.photos.photo[i]));
-        return listOfUrls;
-    }
-
-    exports.getRecentPhotos = getRecentPhotos;
+    var server = require("./server.js");
+    var port = process.argv[2];
+    server.start(CONTENT_DIR + "/homepage.html", CONTENT_DIR + "/404.html", port, function() {
+        console.log("Server started");
+    });
 })();

@@ -5,6 +5,8 @@
  * Time: 3:10 PM
  * To change this template use File | Settings | File Templates.
  */
+
+// This code comes from the LetsLearnJavascript tutorial done by James Shore
 (function() {
     "use strict";
 

@@ -1,3 +1,5 @@
+
+// This code comes from the LetsLearnJavascript tutorial done by James Shore
 (function(){
 
     "use strict";

@@ -9,7 +9,7 @@
    "use strict";
 
     var request = require("request");
-    var nodeFlickrToy = require("./nodeFlickrToy.js");
+    var nodeFlickrToy = require("./nodeFlickr.js");
     var flickrId = "AN API KEY HERE";
     var oldRequestGetMethod;
 
