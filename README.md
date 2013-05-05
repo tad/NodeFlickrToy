@@ -17,6 +17,9 @@ UPDATE: April 28, 2013 - server side code is complete for phase one as server is
 to recent flickr photos.  I've written all of the code so far via pretty strict TDD.  I've also written an integration
 test (not via TDD) just to prove to myself that the code can work with actual flickr responses.
 
+UPDATE: May 4, 2013 - added html server code and tests from Weewikipaint tutorial which I'm watching.  It's quite
+excellent and is done by James Shore: http://www.letscodejavascript.com/
+
 Phase One Web Client:
 I need to learn more node.js before I can build a web client.  Phase one web client will just show a nice looking page
 filled with similar sized recent photos from flickr.
