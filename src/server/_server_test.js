@@ -24,37 +24,37 @@
         done();
     };
 
-    exports.test_servesHomePageFromFile = function(test) {
-        var expectedData = "This is a home page file";
-        fs.writeFileSync(TEST_HOME_PAGE, expectedData);
+//    exports.test_servesHomePageFromFile = function(test) {
+//        var expectedData = "This is a home page file";
+//        fs.writeFileSync(TEST_HOME_PAGE, expectedData);
+//
+//        httpGet("http://localhost:8080", function(response, responseData) {
+//            test.equals(200, response.statusCode, "status code");
+//            test.equals(expectedData, responseData, "response text");
+//            test.done();
+//        });
+//    };
 
-        httpGet("http://localhost:8080", function(response, responseData) {
-            test.equals(200, response.statusCode, "status code");
-            test.equals(expectedData, responseData, "response text");
-            test.done();
-        });
-    };
+//    exports.test_returns404FromFileForEverythingExceptHomePage = function(test) {
+//        var expectedData = "This is a custom 404 file";
+//        fs.writeFileSync(TEST_404_PAGE, expectedData);
+//
+//        httpGet("http://localhost:8080/bargle", function(response, responseData){
+//            test.equals(404, response.statusCode, "status code");
+//            test.equals(expectedData, responseData, "404 text");
+//            test.done();
+//        });
+//    };
 
-    exports.test_returns404FromFileForEverythingExceptHomePage = function(test) {
-        var expectedData = "This is a custom 404 file";
-        fs.writeFileSync(TEST_404_PAGE, expectedData);
-
-        httpGet("http://localhost:8080/bargle", function(response, responseData){
-            test.equals(404, response.statusCode, "status code");
-            test.equals(expectedData, responseData, "404 text");
-            test.done();
-        });
-    };
-
-    exports.test_returnsHomePageWhenAskedForIndex = function(test) {
-        var testDir = "generated/test";
-
-        fs.writeFileSync(TEST_HOME_PAGE, "foo");
-        httpGet("http://localhost:8080/index.html", function(response, responseData) {
-            test.equals(200, response.statusCode, "status code");
-            test.done();
-        });
-    };
+//    exports.test_returnsHomePageWhenAskedForIndex = function(test) {
+//        var testDir = "generated/test";
+//
+//        fs.writeFileSync(TEST_HOME_PAGE, "foo");
+//        httpGet("http://localhost:8080/index.html", function(response, responseData) {
+//            test.equals(200, response.statusCode, "status code");
+//            test.done();
+//        });
+//    };
 
     exports.test_requiresHomePageParameter = function(test) {
         test.throws(function() {

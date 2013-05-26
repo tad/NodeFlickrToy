@@ -12,7 +12,7 @@
 
     "use strict";
 
-    var nodeFlickrToy = require("./nodeFlickrToy.js");
+    var nodeFlickrToy = require("./nodeFlickr.js");
     var flickrId = "YOUR API KEY HERE";
 
     nodeFlickrToy.getRecentPhotos(flickrId, function(data) {
